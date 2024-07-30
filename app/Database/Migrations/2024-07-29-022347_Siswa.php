@@ -22,6 +22,10 @@ class Siswa extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'foto' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '300',
+            ],
             'date' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

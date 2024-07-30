@@ -8,12 +8,12 @@ class SiswaModel extends Model
 {
     protected $table            = 'siswa';
     protected $primaryKey       = 'id';
-    protected $allowedFields = ['name','slug','date','school_from','address','id_kelas'];
+    protected $allowedFields = ['name','slug','date','school_from','address','id_kelas','foto'];
     protected $useTimestamp = true;
 
     public function getDataSiswa($slug)
     {
-        return $this->where('slug', $slug)->first();
+        return $this->select('siswa.*, kelas.nama_kelas')->join('kelas', 'kelas.id_kelas = siswa.id_kelas')->where('siswa.slug', $slug)->first();
     }
     public function getDataSiswaById($id)
     {

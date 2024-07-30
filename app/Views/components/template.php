@@ -32,11 +32,11 @@
                             </li>
 
                             <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('siswa/') ?>"> Siswa </a>
+                                <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('siswa/') ?>"> Siswa!</a>
                             </li>
 
                             <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('class/') ?>"> Class </a>
+                                <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('class/') ?>"> Class!</a>
                             </li>
 
                         </ul>

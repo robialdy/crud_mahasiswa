@@ -21,6 +21,7 @@
                 <thead">
                     <tr>
                         <th class="text-left px-4 py-2 font-medium text-gray-900">No</th>
+                        <th class="text-left px-4 py-2 font-medium text-gray-900">Picture</th>
                         <th class="text-left px-4 py-2 font-medium text-gray-900">Name</th>
                         <th class="text-left px-4 py-2 font-medium text-gray-900">Date</th>
                         <th class="text-left px-4 py-2 font-medium text-gray-900">School Form</th>
@@ -35,21 +36,24 @@
                         foreach ($listSiswa as $ls) : ?>
                             <tr>
                                 <td class="px-4 py-2 font-medium text-gray-900"><?= $i; ?></td>
+                                <td class="px-4 py-2 text-gray-700"><img class="w-24 h-24 object-cover shadow-xl" src="<?= base_url() ?>assets/img/<?= $ls['foto'] ?>" alt="foto"></td>
                                 <td class="px-4 py-2 text-gray-700"><?= $ls['name']; ?></td>
                                 <td class="px-4 py-2 text-gray-700"><?= $ls['date']; ?></td>
                                 <td class="px-4 py-2 text-gray-700"><?= $ls['school_from']; ?></td>
                                 <td class="px-4 py-2 text-gray-700"><?= $ls['address']; ?></td>
                                 <td class="px-4 py-2 text-gray-700"><?= $ls['nama_kelas']; ?></td>
-                                <td class="px-4 py-2 flex space-x-2">
-                                    <a href="<?= site_url('siswa/e/') ?><?= $ls['slug']; ?>" class="inline-block rounded bg-teal-500 px-4 py-2 text-xs font-medium text-white hover:bg-teal-700">
-                                        Edit
-                                    </a>
-                                    <form action="<?= site_url('siswa/delete/') ?><?= $ls['id']; ?>" method="POST">
-                                        <?= csrf_field() ?>
-                                        <!-- <input type="hidden" name="_method" value="DELETE"> INI FUNGSI GA SIH SEBENERNYA ANYING -->
-                                        <button type="submit" class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-700">Delete</button>
-                                    </form>
+                                <td class="px-4 py-2">
+                                    <div class="flex  space-x-2">
+                                        <a href="<?= site_url('siswa/e/') ?><?= $ls['slug']; ?>" class="inline-block rounded bg-teal-500 px-4 py-2 text-xs font-medium text-white hover:bg-teal-700">
+                                            Edit
+                                        </a>
+                                        <form action="<?= site_url('siswa/delete/') ?><?= $ls['id']; ?>" method="POST">
+                                            <?= csrf_field() ?>
+                                            <button type="submit" class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-700" onclick="return confirm('Yakin bro?')">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
+
                             </tr>
                         <?php
                             $i++;

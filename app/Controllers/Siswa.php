@@ -46,9 +46,23 @@ class Siswa extends BaseController
             'school' => 'required',
             'address' => 'required',
             'class' => 'required',
+            'foto'  => [
+                'rules'     => 'uploaded[foto]|max_size[foto,5120]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors'    =>[
+                    'uploaded'  => 'Foto Harap di isi',
+                    'max_size'  => 'Ukuran foto terlalu besar',
+                    'is_image'  => 'Yang anda pilih bukan gambar',
+                    'mime_in'  => 'Yang anda pilih bukan gambar',
+                ]
+            ]
         ])) {
             return redirect()->back()->withInput();        
         }
+        // gambar
+        $fileFoto = $this->request->getFile('foto');
+        $namaFoto = $fileFoto->getRandomName();
+        $fileFoto->move('assets/img', $namaFoto);
+
 
         $slug = url_title($this->request->getVar('name'), '-', true);
         $this->SiswaModel->save([
@@ -58,6 +72,7 @@ class Siswa extends BaseController
             'id_kelas' => $this->request->getVar('class'),
             'school_from' => $this->request->getVar('school'),
             'address' => $this->request->getVar('address'),
+            'foto'  => $namaFoto,
         ]);
         session()->setFlashData('notif', 'Data Baru berhasil di tambahkan');
         return redirect()->to('siswa/');
@@ -68,6 +83,7 @@ class Siswa extends BaseController
         $data = [
             'title'     => 'Edit Siswa  | IGAPIN',
             'siswa'     => $this->SiswaModel->getDataSiswa($slug),
+            'listKelas' => $this->KelasModel->findAll(),
         ];
         return view('siswa/edit', $data);
     }
@@ -87,18 +103,35 @@ class Siswa extends BaseController
             'date' => 'required',
             'school' => 'required',
             'address' => 'required',
+            'class'   => 'required',
+            'foto'  => [
+                'rules'     => 'uploaded[foto]|max_size[foto,5120]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors'    => [
+                    'uploaded'  => 'Foto Harap di isi',
+                    'max_size'  => 'Ukuran foto terlalu besar',
+                    'is_image'  => 'Yang anda pilih bukan gambar',
+                    'mime_in'  => 'Yang anda pilih bukan gambar',
+                ]
+            ]
         ])) {
             return redirect()->to('siswa/e/' . $this->request->getVar('slug'))->withInput();
         }
+
+        // gambar
+        $fileFoto = $this->request->getFile('foto');
+        $namaFoto = $fileFoto->getRandomName();
+        $fileFoto->move('assets/img', $namaFoto);
 
         $slug = url_title($this->request->getVar('name'), '-', true);
         $this->SiswaModel->save([
             'id'   => $id,
             'name' => $this->request->getVar('name'),
+            'id_kelas' => $this->request->getVar('class'),
             'slug' => $slug,
             'date' => $this->request->getVar('date'),
             'school_from' => $this->request->getVar('school'),
             'address' => $this->request->getVar('address'),
+            'foto'  => $namaFoto,
         ]);
         session()->setFlashData('notif', 'Data Baru berhasil di update');
         return redirect()->to('siswa/');
