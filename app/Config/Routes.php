@@ -6,6 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->get('/registrasi', 'Auth::registrasi');
+
+
 //manipulasi kontroller kelas menjadi class
 $routes->get('class/', 'Kelas::index');
 $routes->get('class/create', 'Kelas::create');

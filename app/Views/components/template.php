@@ -39,6 +39,9 @@
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('class/') ?>"> Class!</a>
                             </li>
 
+                            <li>
+                                <a class="text-gray-500 transition hover:text-gray-500/75" href="<?= site_url('registrasi/') ?>"> Account!</a>
+                            </li>
                         </ul>
                     </nav>
 
@@ -46,10 +49,9 @@
             </div>
         </div>
     </header>
-    <!-- endheader -->
+
 
     <?= $this->renderSection('content'); ?>
-
 </body>
 
 </html>

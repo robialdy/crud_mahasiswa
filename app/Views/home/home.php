@@ -11,7 +11,7 @@
             <div class="mx-auto max-w-xl text-center mb-36">
                 <h1 class="text-3xl font-extrabold sm:text-5xl">
                     Terbaik Tetap Selalu
-                    <strong class="font-extrabold text-teal-600 sm:block">Ada Singgasana DiKampus IGAPIN.</strong>
+                    <strong class="font-extrabold text-teal-600 sm:block">Kampus IGAPIN.</strong>
                 </h1>
 
                 <p class="mt-4 sm:text-xl/relaxed">
