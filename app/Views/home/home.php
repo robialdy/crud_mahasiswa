@@ -6,6 +6,8 @@
 <main class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 mt-8">
     <section id="about" class="mb-16">
 
+    <p><?= session()->get('user') ?></p>
+
         <!-- <div class="mx-auto max-w-screen-xl px-4 py-auto lg:flex lg:h-screen lg:items-center"> -->
         <div class="flex items-center justify-center h-screen">
             <div class="mx-auto max-w-xl text-center mb-36">

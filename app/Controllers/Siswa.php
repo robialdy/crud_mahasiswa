@@ -20,8 +20,12 @@ class Siswa extends BaseController
         return redirect()->to('siswa/');
     }
 
-    public function index(): string
+    public function index()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title'     => 'Daftar Siswa | IGAPIN',
             'listSiswa' => $this->SiswaModel->siswaWithKelas(),
@@ -31,6 +35,10 @@ class Siswa extends BaseController
 
     public function create()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title'     => 'Daftar Siswa | IGAPIN',
             'listKelas' => $this->KelasModel->findAll(),
@@ -40,6 +48,10 @@ class Siswa extends BaseController
 
     public function save()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         if (!$this->validate([
             'name' => 'required|is_unique[siswa.name]',
             'date' => 'required',
@@ -80,6 +92,10 @@ class Siswa extends BaseController
 
     public function e($slug)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title'     => 'Edit Siswa  | IGAPIN',
             'siswa'     => $this->SiswaModel->getDataSiswa($slug),
@@ -90,6 +106,10 @@ class Siswa extends BaseController
 
     public function update($id)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         //cek agar ketika edit name sendiri tidak unik
         $data_db_siswa = $this->SiswaModel->getDataSiswaById($id);
         if ($this->request->getVar('name') == $data_db_siswa['name']) {
@@ -139,6 +159,9 @@ class Siswa extends BaseController
 
     public function delete($id)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
 
         $this->SiswaModel->delete($id);
         return redirect()->to('siswa/');

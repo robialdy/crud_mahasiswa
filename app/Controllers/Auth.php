@@ -9,7 +9,6 @@ class Auth extends BaseController
     public function __construct()
     {
         $this->UsersModel = new UsersModel();
-        session();
     }
 
     //login
@@ -38,6 +37,10 @@ class Auth extends BaseController
         $user = $this->UsersModel->where('username', $username)->first();
 
         if($user != null && password_verify($password, $user['password'])) {
+            // $sessionData = [
+            //     'username' => $user['username'],
+            // ];
+            session()->set('user', $user['username']);
             return redirect()->to(base_url());
         } else {
             return redirect()->back()->withInput();
@@ -71,6 +74,12 @@ class Auth extends BaseController
             'email'     =>  $this->request->getVar('email'),
             'password' =>  $password,  
         ]);
+        return redirect()->to('auth/');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
         return redirect()->to('auth/');
     }
 }

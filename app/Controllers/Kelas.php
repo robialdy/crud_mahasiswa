@@ -17,8 +17,12 @@ class Kelas extends BaseController
         return redirect()->to('kelas/');
     }
 
-    public function index(): string
+    public function index()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title'     => 'Class | IGAPIN',
             'listKelas' => $this->KelasModel->findAll(),
@@ -28,6 +32,10 @@ class Kelas extends BaseController
 
     public function create()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title' => 'Create Class | IGAPIN'
         ];
@@ -36,6 +44,10 @@ class Kelas extends BaseController
 
     public function save()
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         if (!$this->validate([
             'nama_kelas' => 'required|is_unique[kelas.nama_kelas]',
             'max' => 'required|max_length[2]',
@@ -56,6 +68,10 @@ class Kelas extends BaseController
 
     public function e($slug)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data = [
             'title'     => 'Edit Siswa  | IGAPIN',
             'kelas'     => $this->KelasModel->getDataKelasBySlug($slug),
@@ -65,6 +81,10 @@ class Kelas extends BaseController
 
     public function update($id)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $data_db_kelas = $this->KelasModel->getDataKelasById($id);
         if ($this->request->getVar('nama_kelas') == $data_db_kelas['nama_kelas']) {
             $valid = '';
@@ -93,6 +113,10 @@ class Kelas extends BaseController
 
     public function delete($id)
     {
+        if (!session()->has('user')) {
+            return redirect()->to('auth/');
+        }
+
         $this->KelasModel->delete($id);
         return redirect()->to('class/');
     }
